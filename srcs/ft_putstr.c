@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycao <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/01 18:12:59 by ycao              #+#    #+#             */
-/*   Updated: 2017/03/01 18:13:01 by ycao             ###   ########.fr       */
+/*   Created: 2017/01/17 10:28:42 by ycao              #+#    #+#             */
+/*   Updated: 2017/01/20 13:11:51 by ycao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void bzero(void *s, int n)
+#include <unistd.h>
+
+void	ft_putchar(char c)
 {
-	while (n > 0)
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char const *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
 	{
-		*(char*)s = 0;
-		n--;
+		ft_putchar(str[i]);
+		i++;
 	}
+	return ;
 }

@@ -10,4 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+void	*ft_memset(void *str, int c, size_t n)
+{
+//	unsigned char	*p;
+//
+//	p = (unsigned char*)str;
+	size_t	i;
+	
+	i = 0;
+	while (i < n)
+	{
+		//*p = (unsigned char)c;
+		//p++;
+		((unsigned char*)str)[i] = (unsigned char)c;
+		i++;
+	}
+	return (str);
+}
