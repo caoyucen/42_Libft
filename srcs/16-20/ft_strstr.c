@@ -1,41 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycao <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 14:01:07 by ycao              #+#    #+#             */
-/*   Updated: 2017/03/15 14:48:26 by ycao             ###   ########.fr       */
+/*   Created: 2017/03/15 15:44:27 by ycao              #+#    #+#             */
+/*   Updated: 2017/03/15 19:38:46 by ycao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-size_t	ft_strlcat(char* dst, const char* src, size_t size)
+char*	ft_strstr(const char *big, const char *little)
 {
-	size_t	len_dst;
-	size_t	len_src;
-	size_t	sum;
-	size_t	i;
+	int		i;
+	int		j;
+	char*	b;
+	char*	l;
+	char*	t;
+	int		tem;
 
 	i = 0;
-	len_dst = ft_strlen(dst);
-	len_src = ft_strlen(src);
-
-	if (size > len_dst)
+	b = (char*)big;
+	l = (char*)little;
+	if (little == NULL)
 	{
-		while (i < size -len_dst - 1 && src[i] != '\0') 
-		{
-			dst[len_dst - 1 + i] = src[i];
-			i++;
-		}
-		dst[len_dst - 1 + i] = '\0';
-		return (len_src + len_dst);
+		return ((char*)big);
 	}
-	return (len_src + size);
+	while (b[i])
+	{
+		if (b[i] == l[0])
+		{
+			t = b + i;
+			j = 1;
+			while (l[j])
+			{
+				tem = i + 1;
+				if (b[tem] != l[j])
+					t = NULL;
+				j++;
+			}
+			if (t != NULL)
+				return (t);
+		}
+		i++;
+	}
+
+	return NULL;
 }
-
-	
-
-
