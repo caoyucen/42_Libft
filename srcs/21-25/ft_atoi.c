@@ -10,24 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char* ft_newstr(const char *str)
+int		ft_begin(char a)
 {
+	if (a == ' ' || a == '\t')
+		return (1);
+	else
+		return (0);
+}
 
+int		ft_neg(char* str)
+{
+	int	neg;
 
+	neg = 1;
+	if(str[0] == '-')
+		neg = -1;
+	return neg;
+}
 
 int		ft_atoi(const char *str)
 {
 	int		neg;
 	int		i;
-	char*	s;
 	int		num;
-	int		mark;
+	//int		mark;
 
-	if (
 	neg = 1;
 	i = 0;
 	num = 0;
-	mark = 0;
-	while (str[i])
+	//mark = 0;
+	if (str == NULL)
+		return (0);
+	while (ft_begin((char*)str))
 	{
-		if (mark != 0 && 
+		str++;
+	}
+	if (*str == '-' || *str == '+')
+	{
+		neg = ft_neg((char*)str);
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		num = num * 10 + (*str - '0');
+		str++; 
+	}
+	return (neg * num);
+}
+
+
