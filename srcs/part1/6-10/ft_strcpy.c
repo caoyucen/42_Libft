@@ -12,11 +12,11 @@
 
 char	*strcpy(char *dest, const char *src)
 {
-	int		i;
+	unsigned int		i;
 
 	i = 0;
-	if (!dest || !src)
-		return NULL;
+	//if (!dest || !src)
+	//	return NULL;
 	while (src[i])
 	{
 		dest[i] = src[i];
