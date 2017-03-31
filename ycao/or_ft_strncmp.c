@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycao <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/01 18:14:37 by ycao              #+#    #+#             */
-/*   Updated: 2017/03/23 19:52:13 by ycao             ###   ########.fr       */
+/*   Created: 2017/03/15 20:47:31 by ycao              #+#    #+#             */
+/*   Updated: 2017/03/23 22:57:15 by ycao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+int	min_strlen(const char *s1, const char *s2)
 {
-	unsigned char	*a1;
-	unsigned char	*a2;
-	size_t			i;
+	int i;
 
 	i = 0;
-	a1 = (unsigned char*)s1;
-	a2 = (unsigned char*)s2;
-	while (i < n)
+	while (s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (i + 1);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	l;
+	size_t	i;
+
+	l = min_strlen(s1, s2);
+	if (l > n)
+		l = n;
+	i = 0;
+	while (i < l)
 	{
-		if (a1[i] != a2[i])
-			return (a1[i] - a2[i]);
+		if (s1[i] > s2[i])
+			return (1);
+		if (s1[i] < s2[i])
+			return (-1);
 		i++;
 	}
 	return (0);

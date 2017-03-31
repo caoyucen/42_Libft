@@ -14,7 +14,7 @@
 
 int		ft_begin(char a)
 {
-	if (a == ' ' || a == '\t')
+	if (a == ' ' || a == '\t' || a == '\v' || a == '\f' || a == '\r'|| a == '\n')
 		return (1);
 	else
 		return (0);
