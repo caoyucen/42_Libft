@@ -131,25 +131,7 @@ ft_strnew:     [OK] [OK] [OK] [OK]
 ft_strdel:     [OK] [OK] {protected}
 ft_strclr:     [OK] {not protected}
 ft_striter:    [OK] [OK] {protected}
-ft_striteri:   [FAILED] [CRASH] {protected}
-[fail]: your striteri does no work
-Test code:
-	char b[] = "override this !";
-	char b2[0xF0];
-	size_t size = strlen(b);
-
-	for (size_t i = 0; i < size; i++)
-		f_striteri(i, b2 + i);
-	b2[size] = 0;
-	ft_striteri(b, f_striteri);
-	if (!strcmp(b, b2))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-    striteri: |0123456789:is !|
- ft_striteri: |0123456789:;<=>|
-
+ft_striteri:   [OK] [CRASH] {protected}
 [crash]: your striteri crash cause it read too many bytes !
 Test code:
 	const size_t size = 10;
@@ -402,94 +384,7 @@ Test code:
 	exit(TEST_SUCCESS);
 
 
-ft_itoa:       [FAILED] [FAILED] [FAILED] [FAILED] [FAILED] [OK] [KO] [KO] [OK] 
-[fail]: your itoa does not work with basic input
-Test code:
-	char *i1 = ft_itoa(-623);
-	char *i2 = ft_itoa(156);
-	char *i3 = ft_itoa(-0);
-
-	if (strcmp(i1, "-623"))
-	{
-		exit(TEST_FAILED);
-	}
-	if (strcmp(i2, "156"))
-	{
-		exit(TEST_FAILED);
-	}
-	if (strcmp("0", i3))
-	{
-		exit(TEST_FAILED);
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: |-623|
-     ft_itoa: ||
-
-[fail]: your itoa does not work with random number
-Test code:
-	srand(clock());
-	int n;
-	char *d;
-
-	for (int i = 0; i < 2000; i++)
-	{
-		n = rand();
-		d = ft_itoa(n);
-		if (atoi(d) != n)
-		{
-			exit(TEST_FAILED);
-		}
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: |3747961|
-     ft_itoa: |0|
-
-[fail]: your itoa does not work with max int
-Test code:
-	char *i1 = ft_itoa(2147483647);
-
-	if (atoi(i1) != 2147483647)
-	{
-		exit(TEST_FAILED);
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: ||
-     ft_itoa: |0|
-
-[fail]: your itoa does not work with min int
-Test code:
-	char *i1 = ft_itoa((-2147483647 -1));
-
-	if (atoi(i1) != (-2147483647 -1))
-	{
-		exit(TEST_FAILED);
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: |ø2147483648|
-     ft_itoa: |0|
-
-[fail]: your itoa don't set \0 at the end of the string
-Test code:
-
-	char *i1 = ft_itoa(-1234);
-	if (strcmp(i1, "-1234"))
-	{
-		exit(TEST_FAILED);
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: ||
-     ft_itoa: |-1234|
-
+ft_itoa:       [OK] [OK] [OK] [OK] [OK] [OK] [KO] [KO] [OK] 
 [KO]: your itoa does not allocate the good size so the \0 test may be false
 Test code:
 	int size;
@@ -542,8 +437,8 @@ Diffs:
      putchar: |ø|
   ft_putchar: |Ã¸|
 
-ft_putstr:     [OK] [OK] {not protected}
-ft_putendl:    [OK] [OK] {not protected}
+ft_putstr:     [OK] [OK] {protected}
+ft_putendl:    [OK] [OK] {protected}
 ft_putnbr:     [OK] [OK] [OK] [OK] [OK] 
 ft_putchar_fd: [OK] [OK] [KO] 
 [KO]: your putchar_fd does not work with unicode
