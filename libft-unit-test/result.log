@@ -10,78 +10,12 @@ ft_strdup:     [OK] [OK] [OK] [OK] [OK] [OK] [OK]
 ft_strcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strncpy:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strcat:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
-ft_strncat:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [CRASH] [OK] [OK] 
-[crash]: your strncat crash cause it read too many bytes or attempt to write on buff !
-Test code:
-	const size_t size = 10;
-	char *str = electric_alloc(size);
-	char *buff = electric_alloc(size);
-
-	__builtin___strcpy_chk (buff, "AB", __builtin_object_size (buff, 2 > 1 ? 1 : 0));
-	__builtin___strcpy_chk (str, "CDEFGHI", __builtin_object_size (str, 2 > 1 ? 1 : 0));
-	ft_strncat(buff, str, 10);
-	exit(TEST_SUCCESS);
-
-
-ft_strlcat:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [FAILED] [OK] [OK] [OK] [OK] 
-[fail]: your strlcat does not set a \0 to the end
-Test code:
-	char *str = "n\0AA";
-	char buff1[0xF00] = "\0AAAAAAAAAAAAAAAA";
-	char buff2[0xF00] = "\0AAAAAAAAAAAAAAAA";
-	size_t max = 10;
-
-	__builtin___strlcat_chk (buff1, str, max, __builtin_object_size (buff1, 2 > 1 ? 1 : 0));
-	ft_strlcat(buff2, str, max);
-	if (!strcmp(buff1, buff2))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-     strlcat: |n|
-  ft_strlcat: |nAAAAAAAAAAAAAAAA|
-
+ft_strncat:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlcat:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strrchr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strstr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
-ft_strnstr:    [OK] [OK] [FAILED] [OK] [OK] [FAILED] [OK] [OK] [OK] [NO CRASH] [OK] 
-[fail]: your strnstr does not work with basic input
-Test code:
-	char *s1 = "MZIRIBMZIRIBMZE123";
-	char *s2 = "MZIRIBMZE";
-	size_t max = strlen(s2);
-	char *i1 = strnstr(s1, s2, max);
-	char *i2 = ft_strnstr(s1, s2, max);
-
-	if (i1 == i2)
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-     strnstr: |(null)|
-  ft_strnstr: |MZIRIBMZE123|
-
-[fail]: your strnstr does not work with empty strings
-Test code:
-	char *s1 = "oh no not the empty string !";
-	char *s2 = "";
-	size_t max = strlen(s1);
-	char *i1 = strnstr(s1, s2, max);
-	char *i2 = ft_strnstr(s1, s2, max);
-
-	if (i1 == i2)
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-     strnstr: |oh no not the empty string !|
-  ft_strnstr: |(null)|
-
-[no crash]: your strnstr does not segfault when null parameter is sent
-Test code:
-	ft_strnstr("fake", ((void *)0), 3);
-
-
+ft_strnstr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strcmp:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strncmp:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_atoi:       [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [KO] [KO] [NO CRASH] 
@@ -129,82 +63,16 @@ ft_memalloc:   [OK] [OK] [OK] [OK] [OK]
 ft_memdel:     [OK] [OK] {protected}
 ft_strnew:     [OK] [OK] [OK] [OK] 
 ft_strdel:     [OK] [OK] {protected}
-ft_strclr:     [OK] {not protected}
+ft_strclr:     [OK] {protected}
 ft_striter:    [OK] [OK] {protected}
-ft_striteri:   [FAILED] [CRASH] {protected}
-[fail]: your striteri does no work
-Test code:
-	char b[] = "override this !";
-	char b2[0xF0];
-	size_t size = strlen(b);
-
-	for (size_t i = 0; i < size; i++)
-		f_striteri(i, b2 + i);
-	b2[size] = 0;
-	ft_striteri(b, f_striteri);
-	if (!strcmp(b, b2))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-    striteri: |0123456789:is !|
- ft_striteri: |0123456789:;<=>|
-
-[crash]: your striteri crash cause it read too many bytes !
-Test code:
-	const size_t size = 10;
-	char *b = electric_alloc(size);
-
-	__builtin___strcpy_chk (b, "123456789", __builtin_object_size (b, 2 > 1 ? 1 : 0));
-	ft_striteri(b, f_striteri);
-	exit(TEST_SUCCESS);
-
-
+ft_striteri:   [OK] [OK] {protected}
 ft_strmap:     [OK] [OK] [OK] [OK] [OK] {protected}
 ft_strmapi:    [OK] [OK] [OK] [OK] [OK] {protected}
-ft_strequ:     [OK] [OK] [OK] [OK] {not protected}
+ft_strequ:     [OK] [OK] [OK] [OK] {protected}
 ft_strnequ:    [OK] [OK] [OK] [OK] {protected}
 ft_strsub:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {protected}
 ft_strjoin:    [OK] [OK] [OK] [OK] [OK] {protected}
-ft_strtrim:    [FAILED] [FAILED] [OK] [OK] [OK] [KO] [CRASH] [OK] [CRASH] {protected}
-[fail]: your strtrim does not work with basic input
-Test code:
-	char *s1 = "   \t  \n\n \t\t  \n\n\nHello \t  Please\n Trim me !\n   \n \n \t\t\n  ";
-	char *s2 = "Hello \t  Please\n Trim me !";
-	char *ret = ft_strtrim(s1);
-
-	if (!strcmp(ret, s2))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-     strtrim: |Hello 	  Please
- Trim me !|
-  ft_strtrim: | 		  
-
-
-Hello 	  Please
- Trim me !|
-
-[fail]: your strtrim does not work with basic input
-Test code:
-	char *s1 = "   \t  \n\n \t\t  \n\n\nHello \t  Please\n Trim me !";
-	char *s2 = "Hello \t  Please\n Trim me !";
-	char *ret = ft_strtrim(s1);
-
-	if (!strcmp(ret, s2))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-     strtrim: |Hello 	  Please
- Trim me !|
-  ft_strtrim: | 		  
-
-
-Hello 	  Please
- Trim me !|
-
+ft_strtrim:    [OK] [OK] [OK] [OK] [OK] [KO] [OK] [CRASH] [OK] {protected}
 [KO]: your strtrim did not allocate the good size so the \0 test may be false
 Test code:
 	char *s1 = "\t   \n\n\n  \n\n\t    Hello \t  Please\n Trim me !\t\t\t\n  \t\t\t\t  ";
@@ -222,33 +90,13 @@ Diffs:
      strtrim: |27|
   ft_strtrim: |55|
 
-[crash]: your strtrim does not allocate memory
+[crash]: you dont protect your malloc return
 Test code:
 	char *s1 = "   \t  \n\n \t\t  \n\n\nHello \t  Please\n Trim me !\n   \n \n \t\t\n  ";
-	char *s2 = "Hello \t  Please\n Trim me !";
-	char *ret = ft_strtrim(s1);
-
-	if (!strcmp(ret, s2))
-	{
-		free(ret);
-		exit(TEST_SUCCESS);
-	}
-	free(ret);
-	exit(TEST_FAILED);
-
-
-[crash]: your strtrim does not set \0 to the end of the string
-Test code:
-	char *s1 = "   \t  \n\n \t\t  \n\n\nHello \t  Please\n Trim me !\n   \n \n \t\t\n  ";
-	char *s2 = "Hello \t  Please\n Trim me !";
 
 	char *ret = ft_strtrim(s1);
-	if (!strcmp(s2, ret))
-	{
-		free(ret);
+	if (ret == ((void *)0))
 		exit(TEST_SUCCESS);
-	}
-	free(ret);
 	exit(TEST_FAILED);
 
 
@@ -402,94 +250,7 @@ Test code:
 	exit(TEST_SUCCESS);
 
 
-ft_itoa:       [FAILED] [FAILED] [FAILED] [FAILED] [FAILED] [OK] [KO] [KO] [OK] 
-[fail]: your itoa does not work with basic input
-Test code:
-	char *i1 = ft_itoa(-623);
-	char *i2 = ft_itoa(156);
-	char *i3 = ft_itoa(-0);
-
-	if (strcmp(i1, "-623"))
-	{
-		exit(TEST_FAILED);
-	}
-	if (strcmp(i2, "156"))
-	{
-		exit(TEST_FAILED);
-	}
-	if (strcmp("0", i3))
-	{
-		exit(TEST_FAILED);
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: |-623|
-     ft_itoa: ||
-
-[fail]: your itoa does not work with random number
-Test code:
-	srand(clock());
-	int n;
-	char *d;
-
-	for (int i = 0; i < 2000; i++)
-	{
-		n = rand();
-		d = ft_itoa(n);
-		if (atoi(d) != n)
-		{
-			exit(TEST_FAILED);
-		}
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: |3747961|
-     ft_itoa: |0|
-
-[fail]: your itoa does not work with max int
-Test code:
-	char *i1 = ft_itoa(2147483647);
-
-	if (atoi(i1) != 2147483647)
-	{
-		exit(TEST_FAILED);
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: ||
-     ft_itoa: |0|
-
-[fail]: your itoa does not work with min int
-Test code:
-	char *i1 = ft_itoa((-2147483647 -1));
-
-	if (atoi(i1) != (-2147483647 -1))
-	{
-		exit(TEST_FAILED);
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: |ø2147483648|
-     ft_itoa: |0|
-
-[fail]: your itoa don't set \0 at the end of the string
-Test code:
-
-	char *i1 = ft_itoa(-1234);
-	if (strcmp(i1, "-1234"))
-	{
-		exit(TEST_FAILED);
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-        itoa: ||
-     ft_itoa: |-1234|
-
+ft_itoa:       [OK] [OK] [OK] [OK] [OK] [OK] [KO] [KO] [OK] 
 [KO]: your itoa does not allocate the good size so the \0 test may be false
 Test code:
 	int size;
@@ -542,8 +303,8 @@ Diffs:
      putchar: |ø|
   ft_putchar: |Ã¸|
 
-ft_putstr:     [OK] [OK] {not protected}
-ft_putendl:    [OK] [OK] {not protected}
+ft_putstr:     [OK] [OK] {protected}
+ft_putendl:    [OK] [OK] {protected}
 ft_putnbr:     [OK] [OK] [OK] [OK] [OK] 
 ft_putchar_fd: [OK] [OK] [KO] 
 [KO]: your putchar_fd does not work with unicode

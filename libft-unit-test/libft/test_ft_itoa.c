@@ -81,6 +81,7 @@ char	*ft_itoa(int n)
 	int		len;
 	int		i;
 
+<<<<<<< HEAD
 	str = (char*)malloc(sizeof(char) * 15);
 	if (!str)
 		return (NULL);
@@ -89,6 +90,22 @@ char	*ft_itoa(int n)
 		ft_strcpy(str, "-2147483648\0");
         return (str);
     }
+=======
+	str = (char*)malloc(sizeof(char) * 13);
+	if (!str)
+		return (NULL);
+	if (n == -2147483648 )
+	{
+		ft_strcpy(str, "-2147483648\0");
+		return (str);
+	}
+	if (n == 0)
+	{
+		str[0] = 0 + '0';
+		str[1] = '\0';
+		return (str);
+	}
+>>>>>>> 0ebac4c96cfadc6aed2bbf6f44ce427523584d10
 	if (n < 0)
 	{
 		n = 0 - n;
@@ -97,6 +114,7 @@ char	*ft_itoa(int n)
 	len = ft_base(n) - 1;
 	if (str[0] == '-')
 		len++;
+<<<<<<< HEAD
     str[len + 1] = '\0';
 	i = 0;
     //ft_putchar('a');
@@ -105,6 +123,16 @@ char	*ft_itoa(int n)
 		str[len - i] = n % 10 + '0';
         ft_putchar('\n');
         ft_putchar(str[len - i]);
+=======
+	str[len + 1] = '\0';
+	i = 0;
+	while (n >= 1)
+	{
+		//ft_putchar('a');
+		str[len - i] = n % 10 + '0';
+		//ft_putchar('b');
+        //ft_putchar(str[len - i]);
+>>>>>>> 0ebac4c96cfadc6aed2bbf6f44ce427523584d10
 		n = n / 10;
 		i++;
 	}
@@ -113,7 +141,12 @@ char	*ft_itoa(int n)
 
 int main ()
 {
+<<<<<<< HEAD
     int n = -12345;
+=======
+    int n = 21474645;
+>>>>>>> 0ebac4c96cfadc6aed2bbf6f44ce427523584d10
     ft_putstr(ft_itoa(n));
+	ft_putchar('\n');
     return (0);
 }
