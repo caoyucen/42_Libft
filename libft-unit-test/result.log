@@ -335,15 +335,5 @@ ft_lstnew:     [OK] [OK] [OK] [OK]
 ft_lstdelone:  [OK] 
 ft_lstdel:     [OK] [OK] [OK] 
 ft_lstadd:     [OK] [OK] [OK] 
-ft_lstiter:    [TIMEOUT] {protected}Test code:
-	t_list *l = lstnew(strdup(" 1 2 3 "), 8);
-
-	l->next = lstnew(strdup("ss"), 3);
-	l->next->next = lstnew(strdup("-_-"), 4);
-	ft_lstiter(l, lstiter_f);
-	if (!strcmp(l->content, "OK !") && !strcmp(l->next->content, "OK !") && !strcmp(l->next->next->content, "OK !"))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-
+ft_lstiter:    [OK] {protected}
 ft_lstmap:     [OK] {protected}
