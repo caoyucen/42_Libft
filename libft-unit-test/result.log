@@ -72,7 +72,18 @@ ft_strequ:     [OK] [OK] [OK] [OK] {protected}
 ft_strnequ:    [OK] [OK] [OK] [OK] {protected}
 ft_strsub:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {protected}
 ft_strjoin:    [OK] [OK] [OK] [OK] [OK] {protected}
-ft_strtrim:    [OK] [OK] [OK] [OK] [OK] [KO] [OK] [CRASH] [OK] {protected}
+ft_strtrim:    [OK] [OK] [OK] [CRASH] [OK] [KO] [OK] [CRASH] [OK] {protected}
+[crash]: your strtrim does not work with full blank input
+Test code:
+	char *s1 = "  \t \t \n   \n\n\n\t";
+	char *s2 = "";
+	char *ret = ft_strtrim(s1);
+
+	if (!strcmp(ret, s2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
 [KO]: your strtrim did not allocate the good size so the \0 test may be false
 Test code:
 	char *s1 = "\t   \n\n\n  \n\n\t    Hello \t  Please\n Trim me !\t\t\t\n  \t\t\t\t  ";
@@ -88,7 +99,7 @@ Test code:
 
 Diffs:
      strtrim: |27|
-  ft_strtrim: |55|
+  ft_strtrim: |28|
 
 [crash]: you dont protect your malloc return
 Test code:
@@ -100,156 +111,7 @@ Test code:
 	exit(TEST_FAILED);
 
 
-ft_strsplit:   [CRASH] [CRASH] [CRASH] [CRASH] [CRASH] [CRASH] [CRASH] [CRASH] [CRASH] {not protected}
-[crash]: your strsplit does not work with basic input
-Test code:
-	char *s = "      split       this for   me  !       ";
-	char **r = ft_strsplit(s, ' ');
-
-	while (*r)
-	{
-		if (strcmp(*r, *ret))
-		{
-			exit(TEST_FAILED);
-		}
-		r++;
-		ret++;
-	}
-	exit(TEST_SUCCESS);
-
-
-[crash]: your strsplit does not work with full space string
-Test code:
-	char *s = "                  ";
-	char **r = ft_strsplit(s, ' ');
-
-	while (*r)
-	{
-		if (strcmp(*r, *ret))
-		{
-			exit(TEST_FAILED);
-		}
-		r++;
-		ret++;
-	}
-	exit(TEST_SUCCESS);
-
-
-[crash]: your strsplit does not work with one word
-Test code:
-	char *s = "                  olol";
-	char **r = ft_strsplit(s, ' ');
-
-	while (*r)
-	{
-		if (strcmp(*r, *ret))
-		{
-			exit(TEST_FAILED);
-		}
-		r++;
-		ret++;
-	}
-	exit(TEST_SUCCESS);
-
-
-[crash]: your strsplit does not work with one word
-Test code:
-	char *s = "olol                     ";
-	char **r = ft_strsplit(s, ' ');
-
-	while (*r)
-	{
-		if (strcmp(*r, *ret))
-		{
-			exit(TEST_FAILED);
-		}
-		r++;
-		ret++;
-	}
-	exit(TEST_SUCCESS);
-
-
-[crash]: your strsplit does not work with empty string
-Test code:
-	char *s = "";
-	char **r = ft_strsplit(s, '\65');
-
-	while (*r)
-	{
-		if (strcmp(*r, *ret))
-		{
-			exit(TEST_FAILED);
-		}
-		r++;
-		ret++;
-	}
-	exit(TEST_SUCCESS);
-
-
-[crash]: your strsplit does not work with full string
-Test code:
-	char *s = "0 0 0 0 0 0 0 0 0";
-	char **r = ft_strsplit(s, ' ');
-
-	while (*r)
-	{
-		if (strcmp(*r, "0"))
-		{
-			exit(TEST_FAILED);
-		}
-		r++;
-		ret++;
-	}
-	exit(TEST_SUCCESS);
-
-
-[crash]: your strsplit does not work with basic input
-Test code:
-	char *s = "split  ||this|for|me|||||!|";
-	int i = 0;
-	char **r = ft_strsplit(s, '|');
-
-	while (r[i])
-	{
-		if (strcmp(r[i], *ret))
-		{
-			exit(TEST_FAILED);
-		}
-		free(r[i]);
-		i++;
-		ret++;
-	}
-	free(r);
-	exit(TEST_SUCCESS);
-
-
-[crash]: you did not protect your strsplit
-Test code:
-	char *s = "      split       this for   me  !       ";
-
-	char **r = ft_strsplit(s, ' ');
-	if (!r)
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-
-[crash]: your strsplit does not work with basic input
-Test code:
-	char *s = "      split       this for   me  !       ";
-
-	char **r = ft_strsplit(s, ' ');
-	while (*r)
-	{
-		if (strcmp(*r, *ret))
-		{
-			exit(TEST_FAILED);
-		}
-		r++;
-		ret++;
-	}
-	exit(TEST_SUCCESS);
-
-
+ft_strsplit:   [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {protected}
 ft_itoa:       [OK] [OK] [OK] [OK] [OK] [OK] [KO] [KO] [OK] 
 [KO]: your itoa does not allocate the good size so the \0 test may be false
 Test code:
