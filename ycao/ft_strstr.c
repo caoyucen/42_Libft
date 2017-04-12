@@ -19,7 +19,7 @@ char	*ft_strstr(const char *big, const char *little)
 	char	*t;
 
 	i = 0;
-	if (!little || !*little)
+	if (!*little)
 		return ((char*)big);
 	while (big[i])
 	{

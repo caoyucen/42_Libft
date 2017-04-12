@@ -22,26 +22,23 @@ int		ft_isspace(char s)
 
 char	*ft_strtrim(char const *s)
 {
-	int		i;
+	int		len;
 	char	*str;
+	size_t	i;
 
-	if (!s)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s));
+	if (!s) 
+	 	return (NULL);
+	i = 0;
+	while (s[i] != '\0' && ft_isspace(s[i]))
+		i++;
+	if (i == ft_strlen(s))
+		return "";
+	len = ft_strlen(s) - 1;
+	while (ft_isspace(s[len]))
+		len--;
+	str = ft_strnew(len + 1 - i);
 	if (!str)
 		return (NULL);
-	ft_strcpy(str, s);
-	i = ft_strlen(str) - 1;
-	while (i >= 0 && ft_isspace(str[i]))
-	{
-		str[i] = '\0';
-		i--;
-	}
-	i = 0;
-	while ((str[i] != '\0') && ft_isspace(str[i]))
-	{
-		str++;
-		i++;
-	}
+	ft_strncpy(str, s + i, (len + 1 - i));
 	return (str);
 }

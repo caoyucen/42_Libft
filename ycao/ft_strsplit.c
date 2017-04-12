@@ -35,19 +35,18 @@ int		ft_word(char const *s, char c)
 	return (num);
 }
 
-void	ft_mallocline(char **str, int n, int len)
+int		ft_wlen(char const *s, char c)
 {
-	int		i;
+	int i;
 
 	i = 0;
-	str = (char**)malloc(sizeof(char*) * n);
-	str[n + 1] = 0;
-	while (i < n)
+	while (s[i] != c && s[i] != '\0')
 	{
-		str[i] = ft_strnew(len);
 		i++;
 	}
+	return (i);
 }
+
 
 char	**ft_strsplit(char const *s, char c)
 {
@@ -55,26 +54,27 @@ char	**ft_strsplit(char const *s, char c)
 	int		n_word;
 	int		i;
 	int		j;
-	int		z;
-
-	str = 0;
+	
+	if (!s)
+		return (NULL);
 	n_word = ft_word(s, c);
-	ft_mallocline(str, n_word, ft_strlen(s));
+	str = (char**)malloc(sizeof(char*) * (n_word + 1));
+	if (!str)
+		return (NULL);
+	str[n_word] = 0;
 	i = 0;
 	j = 0;
 	while (s[i])
 	{
 		if (s[i] != c)
 		{
-			z = -1;
-			while (s[i] != c)
-			{
-				str[j][++z] = s[i];
-				i++;
-			}
+			str[j] = ft_strnew(ft_wlen(&s[i], c) + 1);
+			ft_strncpy(str[j], &s[i], ft_wlen(&s[i], c));
+			i = i + ft_wlen(&s[i], c);
 			j++;
 		}
-		i++;
+		else
+			i++;
 	}
 	return (str);
 }

@@ -25,17 +25,27 @@ int		ft_base(int n)
 	return (i);
 }
 
+
 char	*ft_itoa(int n)
 {
 	char	*str;
 	int		len;
 	int		i;
-
-	str = ft_strnew(12);
+	
+	str = (char*)malloc(sizeof(char) * 13);
 	if (!str)
 		return (NULL);
-	if (n == -2147483648)
-		ft_strcpy(str, "-2147483648");
+	if (n == -2147483648 )
+	{
+		ft_strcpy(str, "-2147483648\0");
+		return (str);
+	}
+	if (n == 0)
+	{
+		str[0] = 0 + '0';
+		str[1] = '\0';
+		return (str);
+	}
 	if (n < 0)
 	{
 		n = 0 - n;
@@ -44,12 +54,14 @@ char	*ft_itoa(int n)
 	len = ft_base(n) - 1;
 	if (str[0] == '-')
 		len++;
+	str[len + 1] = '\0';
 	i = 0;
-	while (i <= len)
+	while (n >= 1)
 	{
-		str[len - i] = n % 10;
+		str[len - i] = n % 10 + '0';
 		n = n / 10;
 		i++;
 	}
 	return (str);
 }
+

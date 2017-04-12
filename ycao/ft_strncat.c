@@ -25,12 +25,10 @@ char	*ft_strncat(char *dest, const char *src, size_t n)
 		i++;
 		j++;
 	}
-	while (j < n)
-	{
-		dest[i] = '\0';
-		i++;
-		j++;
-	}
+	//while (j < n)
+	//{
 	dest[i] = '\0';
+	//	i++;
+	//	j++;
 	return (dest);
 }
