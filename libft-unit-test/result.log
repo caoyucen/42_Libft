@@ -18,35 +18,7 @@ ft_strstr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strnstr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strcmp:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strncmp:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
-ft_atoi:       [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [KO] [KO] [NO CRASH] 
-[KO]: your atoi does not work with over long max value
-Test code:
-	char n[40] = "99999999999999999999999999";
-	int i1 = atoi(n);
-	int i2 = ft_atoi(n);
-
-	if (i1 == i2)
-		exit(TEST_SUCCESS);
-	exit(TEST_KO);
-
-Diffs:
-        atoi: |-1|
-     ft_atoi: |-469762049|
-
-[KO]: your atoi does not work with over long min value
-Test code:
-	char n[40] = "-99999999999999999999999999";
-	int i1 = atoi(n);
-	int i2 = ft_atoi(n);
-
-	if (i1 == i2)
-		exit(TEST_SUCCESS);
-	exit(TEST_KO);
-
-Diffs:
-        atoi: |0|
-     ft_atoi: |469762049|
-
+ft_atoi:       [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [NO CRASH] 
 [no crash]: your atoi does not work with over long min value
 Test code:
 	ft_atoi(((void *)0));
@@ -72,45 +44,7 @@ ft_strequ:     [OK] [OK] [OK] [OK] {protected}
 ft_strnequ:    [OK] [OK] [OK] [OK] {protected}
 ft_strsub:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {protected}
 ft_strjoin:    [OK] [OK] [OK] [OK] [OK] {protected}
-ft_strtrim:    [OK] [OK] [OK] [CRASH] [OK] [KO] [OK] [CRASH] [OK] {protected}
-[crash]: your strtrim does not work with full blank input
-Test code:
-	char *s1 = "  \t \t \n   \n\n\n\t";
-	char *s2 = "";
-	char *ret = ft_strtrim(s1);
-
-	if (!strcmp(ret, s2))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-
-[KO]: your strtrim did not allocate the good size so the \0 test may be false
-Test code:
-	char *s1 = "\t   \n\n\n  \n\n\t    Hello \t  Please\n Trim me !\t\t\t\n  \t\t\t\t  ";
-	char *s2 = "Hello \t  Please\n Trim me !";
-	int r_size = strlen(s2);
-	int size;
-
-	ft_strtrim(s1);
-	size = get_last_malloc_size();
-	if (size == r_size + 1)
-		exit(TEST_SUCCESS);
-	exit(TEST_KO);
-
-Diffs:
-     strtrim: |27|
-  ft_strtrim: |28|
-
-[crash]: you dont protect your malloc return
-Test code:
-	char *s1 = "   \t  \n\n \t\t  \n\n\nHello \t  Please\n Trim me !\n   \n \n \t\t\n  ";
-
-	char *ret = ft_strtrim(s1);
-	if (ret == ((void *)0))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-
+ft_strtrim:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {protected}
 ft_strsplit:   [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {protected}
 ft_itoa:       [OK] [OK] [OK] [OK] [OK] [OK] [KO] [KO] [OK] 
 [KO]: your itoa does not allocate the good size so the \0 test may be false
