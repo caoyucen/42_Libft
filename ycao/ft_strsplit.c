@@ -12,49 +12,13 @@
 
 #include "libft.h"
 
-int		ft_word(char const *s, char c)
-{
-	int		i;
-	int		num;
-	int		mark;
-
-	i = 0;
-	num = 0;
-	mark = 1;
-	while (s[i])
-	{
-		if (s[i] == c)
-			mark = 1;
-		if (s[i] != c && mark == 1)
-		{
-			mark = 0;
-			num++;
-		}
-		i++;
-	}
-	return (num);
-}
-
-int		ft_wlen(char const *s, char c)
-{
-	int i;
-
-	i = 0;
-	while (s[i] != c && s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-
 char	**ft_strsplit(char const *s, char c)
 {
 	char	**str;
 	int		n_word;
 	int		i;
 	int		j;
-	
+
 	if (!s)
 		return (NULL);
 	n_word = ft_word(s, c);
@@ -66,15 +30,13 @@ char	**ft_strsplit(char const *s, char c)
 	j = 0;
 	while (s[i])
 	{
-		if (s[i] != c)
+		if (s[i++] != c)
 		{
-			str[j] = ft_strnew(ft_wlen(&s[i], c) + 1);
-			ft_strncpy(str[j], &s[i], ft_wlen(&s[i], c));
-			i = i + ft_wlen(&s[i], c);
+			str[j] = ft_strnew(ft_wlen(&s[i - 1], c) + 1);
+			ft_strncpy(str[j], &s[i - 1], ft_wlen(&s[i - 1], c));
+			i = i - 1 + ft_wlen(&s[i - 1], c);
 			j++;
 		}
-		else
-			i++;
 	}
 	return (str);
 }

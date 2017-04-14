@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_put_positive(int n)
+static void	ft_put_positive(int n)
 {
 	if (n < 10)
 	{
@@ -23,7 +23,7 @@ void	ft_put_positive(int n)
 	ft_putchar(n % 10 + 48);
 }
 
-void	ft_putnbr(int n)
+void		ft_putnbr(int n)
 {
 	if (n == -2147483648)
 	{
